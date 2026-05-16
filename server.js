@@ -1,0 +1,123 @@
+const express = require('express');
+const app = express();
+const PORT = 3000;
+
+// Configuración de la página web con tus etiquetas de Google Analytics integradas
+const htmlContent = `
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Página de Prueba - Google Analytics</title>
+    
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZBQ51D34SW"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-ZBQ51D34SW');
+    </script>
+
+    <style>
+        :root {
+            --bg-color: #0f172a;
+            --card-bg: #1e293b;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --accent-primary: #3b82f6;
+            --accent-success: #10b981;
+        }
+        body {
+            font-family: 'Segoe UI', Roboto, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+        .container {
+            text-align: center;
+            background: var(--card-bg);
+            padding: 2.5rem;
+            border-radius: 16px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+            max-width: 450px;
+            width: 90%;
+        }
+        h1 { font-size: 2rem; margin-bottom: 0.5rem; color: #fff; }
+        p { color: var(--text-muted); font-size: 1rem; margin-bottom: 2rem; }
+        .btn {
+            display: block;
+            width: 100%;
+            padding: 0.8rem;
+            margin: 0.8rem 0;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: transform 0.2s, opacity 0.2s;
+        }
+        .btn:active { transform: scale(0.98); }
+        .btn-blue { background-color: var(--accent-primary); color: white; }
+        .btn-green { background-color: var(--accent-success); color: white; }
+        .status {
+            margin-top: 1.5rem;
+            font-size: 0.85rem;
+            color: #64748b;
+            background: #0f172a;
+            padding: 0.5rem;
+            border-radius: 6px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Entorno de Prueba 🚀</h1>
+        <p>Tu tag de GA4 (G-ZBQ51D34SW) ya está activo en esta página.</p>
+        
+        <!-- Botón para medir Evento de Éxito -->
+        <button class="btn btn-blue" onclick="trackCustomEvent('click_boton_primario')">
+            Interactuar (Botón Azul)
+        </button>
+        
+        <!-- Botón para medir Evento de Conversión -->
+        <button class="btn btn-green" onclick="trackCustomEvent('click_boton_secundario')">
+            Simular Compra (Botón Verde)
+        </button>
+
+        <div class="status" id="log">Estado: Esperando interacción...</div>
+    </div>
+
+    <script>
+        // Función interactiva que envía eventos manuales usando tu ID asignado arriba
+        function trackCustomEvent(eventName) {
+            if (typeof gtag !== 'undefined') {
+                gtag('event', eventName, {
+                    'event_category': 'Prueba_Usuario',
+                    'event_label': 'Interacción desde Web Node'
+                });
+                document.getElementById('log').innerText = '✅ Evento "' + eventName + '" enviado a GA4';
+            } else {
+                document.getElementById('log').innerText = '❌ Error: Script de GA4 no detectado';
+            }
+        }
+    </script>
+</body>
+</html>
+`;
+
+// Servir la página web en la ruta raíz
+app.get('/', (req, res) => {
+    res.send(htmlContent);
+});
+
+app.listen(PORT, () => {
+    console.log(`Servidor de prueba corriendo en http://localhost:${PORT}`);
+});
