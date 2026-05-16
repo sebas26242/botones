@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Explora la Naturaleza - Google Analytics</title>
+    <title>Descubre Nicaragua - Naturaleza y Aventura</title>
 
     <!-- Estilos Externos -->
     <link rel="stylesheet" href="style.css">
@@ -26,22 +26,27 @@
 <body>
 
     <div class="container">
-        <h1>Conecta con el Paisaje 🌲</h1>
-        <p>Prueba de interacción y analíticas en tiempo real.</p>
+        <h1>Explora Nicaragua 🇳🇮</h1>
+        
+        <div id="destination-card">
+            <img id="dest-img" src="" alt="Destino">
+            <h2 id="dest-name">Cargando...</h2>
+            <p id="dest-desc">Buscando los mejores rincones del país...</p>
+        </div>
 
         <div class="btn-group">
-            <button class="btn btn-blue" onclick="trackCustomEvent('click_boton_primario', 'Interacción General')">
-                <span>📍</span> Explorar Ruta
+            <button class="btn btn-blue" onclick="mostrarSiguienteDestino()">
+                <span>🔄</span> Siguiente Lugar
             </button>
 
-            <button class="btn btn-green" onclick="trackCustomEvent('click_boton_secundario', 'Conversión')">
-                <span>🍃</span> Reservar Guía
+            <button class="btn btn-green" onclick="trackCustomEvent('click_contacto', 'Interés de Viaje')">
+                <span>✈️</span> Planear Viaje
             </button>
         </div>
 
-        <div id="adblock-warning">⚠️ Parece que un AdBlocker está activado. Google Analytics podría no funcionar.</div>
+        <div id="adblock-warning">⚠️ AdBlocker detectado. La analítica podría fallar.</div>
         
-        <div class="status" id="log">Estado: Esperando a que el bosque hable...</div>
+        <div class="status" id="log">Estado: Listo para explorar.</div>
     </div>
 
     <!-- Scripts Externos -->
